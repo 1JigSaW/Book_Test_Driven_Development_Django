@@ -1,6 +1,28 @@
 from selenium import webdriver
+<<<<<<< HEAD
 
 browser = webdriver.Firefox()
 browser.get('http://localhost:8000')
 
 assert 'Django' in browser.title
+=======
+import unittest
+
+class NewVisitorTest(unittest.TestCase):
+	'''test new visitor'''
+	def setUp(self):
+		'''install'''
+		self.browser = webdriver.Firefox()
+
+	def TearDown(self):
+		'''dismantling'''
+		self.browser.quit()
+
+	def test_can_start_a_list_and_retrieve_it_later(self):
+		self.browser.get('http://localhost:8000')
+		self.assertIn('To-Do', self.browser.title)
+		self.fail('Закончить тест!')
+
+if __name__ == '__main__':
+	unittest.main(warnings='ignore')
+>>>>>>> c027e5e5e2eddfda9468506ec83ee8a78d394daa
