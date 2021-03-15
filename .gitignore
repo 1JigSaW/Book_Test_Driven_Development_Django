@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 "db.sqlite3" 
 "geckodriver.log" 
+=======
+>>>>>>> c027e5e5e2eddfda9468506ec83ee8a78d394daa
 "__pycache__" 
 "*.pyc" 
