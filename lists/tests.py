@@ -27,3 +27,8 @@ class HomePageTest(TestCase):
         self.assertTrue(html.strip().endswith('</html>'))
 
         self.assertTemplateUsed(response, 'home.html') 
+
+    def test_uses_home_template(self):
+        '''home template'''
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'home.html')
