@@ -4,11 +4,11 @@ from selenium.webdriver.common.keys import Keys
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 import time
 import os
+from unittest import skip
 
 MAX_WAIT = 10
 
-class NewVisitorTest(StaticLiveServerTestCase):
-
+class FunctionalTest(StaticLiveServerTestCase):
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
         while True:
@@ -31,6 +31,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
+
+class NewVisitorTest(FunctionalTest):
     def test_can_start_a_list_for_one_user(self):
         # Edit has heard about a cool new online to-do app. She goes 
         # to check out its homepage
@@ -119,7 +121,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('Buy milk', page_text)
 
         # Satisfed, they both go back to sleep
-         
+
+class LayoutAndStylingTest(FunctionalTest):
     def test_layout_and_styling(self):
         # Edith goes to the home page
         self.browser.get(self.live_server_url)
@@ -144,3 +147,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
             512,
             delta=10
         )
+
+class ItemValidationTest(FunctionalTest):
+    @skip
+    def test_cannot_add_empty_list_items(self):
+        '''test: not add empty items'''
+        self.fail()
