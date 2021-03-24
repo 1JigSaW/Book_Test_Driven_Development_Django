@@ -70,3 +70,28 @@ class ListModelTest(TestCase):
         """тест строкового представления"""
         item = Item(text='some text')
         self.assertEqual(str(item), 'some text')
+
+class ListAndItemModelTest(TestCase):
+    '''test models lists'''
+
+    def test_default_text(self):
+        '''test default text'''
+        item = Item()
+        self.assertEqual(item.text, '')
+
+    def test_item_is_related_to_list(self):
+        '''test: item is related to list'''
+        list_ = List.objects.create()
+        item = Item()
+        item.list = list_
+        item.save()
+        self.assertIn(item, list_.item_set.all())
+
+    def test_duplicate_items_are_invalid(self):
+        '''тест: повторы элементы недопустимы'''
+        list_ = List.objects.create()
+        Item.objects.create(list=list_, text='bla')
+        with self.assertRaises(ValidationError):
+        item = Item(list=list_, text='bla')
+        # item.full_clean()
+        item.save()
